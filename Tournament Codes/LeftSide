@@ -1,1 +1,58 @@
+void LeftSide(){
+    Drive.Move(29.3, 1000);
+	Drive.TurnTo(-90, 1000, 70);
+	
+	pros::delay(300);
+    matchLoader.extend(); // only extend here, no toggle
+    pros::delay(400);  
+	pros::delay(200);
+	Drive.Move(10, 1000, {127, false});
 
+	Intake.autonIntake(127, 0);
+    Intake.autonIntake(-127, 2);
+
+    pros::delay(560);
+
+    Intake.autonIntake(0, 0);
+    Intake.autonIntake(0, 2);
+
+    Drive.Move(-12, 1000);
+    pros::delay(100);
+    matchLoader.toggle();
+    pros::delay(300);
+    Drive.TurnTo(90, 1000, 70);
+    pros::delay(700);
+    Drive.Move(13, 1000);
+
+    //PrivateVoltage(127, 0);
+    //PrivateVoltage(127, 2);
+    //PrivateVoltage(127, 1);
+
+    Intake.autonIntake(127,0);
+    Intake.autonIntake(127, 2);
+    Intake.autonIntake(127, 1);
+
+    pros::delay(2400);
+
+    Intake.autonIntake(0, 0);
+    Intake.autonIntake(0, 2);
+    Intake.autonIntake(0, 1);
+
+    Drive.Move(-13, 1000);
+    Drive.TurnTo(136.5,  1000, 70);
+    Intake.autonIntake(127, 0);
+    Intake.autonIntake(-127, 2);
+    Drive.Move(45.5, 1000);
+
+   
+
+   
+
+    Intake.autonIntake(0, 0);
+    Intake.autonIntake(0, 2);
+
+    Intake.autonIntake(127, 0);
+    Intake.autonIntake(127, 2);
+    Intake.autonIntake(-127, 1);
+
+}
