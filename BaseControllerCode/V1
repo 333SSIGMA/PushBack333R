@@ -1,1 +1,74 @@
 
+//Moving the bot through the controller
+
+void DriveTrain::Op(bool Curves){
+
+    DriveState = OP;
+
+    double Yaw = Master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+
+    double Throttle = Master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+
+    PrivateVoltage(Throttle + Yaw, Throttle - Yaw);
+
+}
+
+//Intake 
+    if (Master.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+
+        PrivateVoltage(127, 0);
+        PrivateVoltage(-127, 2);
+
+    //expel the ball, this would be for the buttom tubes or to get rid of opposing team's balls
+    }else if(Master.get_digital(pros::E_CONTROLLER_DIGITAL_R2)){
+        //When you created the intake motors, you should've put them all in a list. To control a specific motor, 
+        //add a comma and the index like below. The first value will send 127 volts to the motor at index 0.
+        //PrivateVoltage(-127, 0);
+        //PrivateVoltage(-127); will send 127 volts to all motors in the Intake List
+
+        PrivateVoltage(-127, 0);
+        PrivateVoltage(127, 2);
+        
+
+    }
+    
+
+    //expel the ball from the very top
+    else if (Master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+        PrivateVoltage(127, 0);
+        PrivateVoltage(127, 2);
+        PrivateVoltage(127, 1);
+
+    }
+
+    //expel the ball from the top middle
+
+    else if(Master.get_digital(pros::E_CONTROLLER_DIGITAL_L2)) {
+        PrivateVoltage(127, 0);
+        PrivateVoltage(127, 2);
+        PrivateVoltage(-127, 1);
+    }
+
+    //if no buttons are pressed, motors stop running. 
+
+    else if(Master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)){
+        Drive.Move(24, 1000);
+    }
+    else{
+
+        PrivateVoltage(0);
+
+    }
+
+}
+
+
+//Pneumatic
+
+if(master.get_digital_new_press(pros::E_CONTROLLER_DIGITAL_A)){
+
+        matchLoader.toggle();
+        aligner.toggle();
+        pros::screen::print(pros::E_TEXT_MEDIUM, 3, "Piston clicked!");
+
+    }
